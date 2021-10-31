@@ -50,6 +50,14 @@ async function run() {
             const services = await cursor.toArray();
             res.send(services);
         });
+        // GET Order API 
+        app.post('/services', async (req, res) => {
+            const services = req.body;
+            console.log('hit', services);
+            const result = await serviceCollection.insertOne(services);
+            console.log(result);
+            res.json(result);
+        });
         // GET Blogs API 
         app.get('/blogs', async (req, res) => {
             const cursor = blogCollection.find({});
@@ -59,7 +67,7 @@ async function run() {
         // Delete API 
         app.delete('/orders/:id', async (req, res) => {
             const id = req.params.id;
-            const query = { _id:ObjectId(id) };
+            const query = { _id: ObjectId(id) };
             const result = await orderCollection.deleteOne(query);
             res.json(result);
         })
