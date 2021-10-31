@@ -50,6 +50,12 @@ async function run() {
             const services = await cursor.toArray();
             res.send(services);
         });
+        // GET services API 
+        app.get('/servicesforhome', async (req, res) => {
+            const cursor = serviceCollection.find({}).limit(6);
+            const services = await cursor.toArray();
+            res.send(services);
+        });
         // GET Order API 
         app.post('/services', async (req, res) => {
             const services = req.body;
